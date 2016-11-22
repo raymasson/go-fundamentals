@@ -28,12 +28,32 @@ func main() {
 	myCourse2 := newCourseMeta2("rmasson", "pro", 2)
 
 	fmt.Println(myCourse2.Author)
+
+	myCourse2.printCourse()
+
+	ecm := enhancedCourseMeta{}
+	ecm.courseMeta = courseMeta{
+		Author: "Nigel Poulton",
+		Level:  "Intermediate",
+		Rating: 5,
+	}
+	ecm.printCourse()
+
+	ecm2 := enhancedCourseMeta{}
+	ecm2.Author = "Ray"
+	ecm2.Level = "noob"
+	ecm2.Rating = 10
+	ecm2.printCourse()
 }
 
 type courseMeta struct {
 	Author string
 	Level  string
 	Rating float64
+}
+
+type enhancedCourseMeta struct {
+	courseMeta
 }
 
 func newCourseMeta() *courseMeta {
@@ -52,4 +72,8 @@ func newCourseMeta2(author, level string, rating float64) *courseMeta {
 	courseMeta.Rating = rating
 
 	return &courseMeta
+}
+
+func (cm *courseMeta) printCourse() {
+	fmt.Printf("\nCourse author: %s, level: %s, rating: %f", cm.Author, cm.Level, cm.Rating)
 }

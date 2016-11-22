@@ -14,6 +14,20 @@ func main() {
 	bestFinish := bestLeagueFinishes(13, 10, 13, 17, 14, 16, 7, 5, 2)
 
 	fmt.Println(bestFinish)
+
+	anonymousFunction := func(finishes ...int) int {
+		best := finishes[0]
+
+		for _, i := range finishes {
+			if i < best {
+				best = i
+			}
+		}
+
+		return best
+	}
+
+	fmt.Println(anonymousFunction(13, 10, 13, 17, 14, 16, 7, 5, 2))
 }
 
 func converter(s1, s2 string) (str1, str2 string) {

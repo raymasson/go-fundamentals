@@ -26,5 +26,32 @@ func main() {
 		fmt.Println("Ray")
 	}()
 
+	//Wait that all goroutines in the waitGrp are done
 	waitGrp.Wait()
+
+	//Channels
+	ch := make(chan string)
+	doneCh := make(chan bool)
+
+	go abcGen(ch)
+	go printer(ch, doneCh)
+
+	//Exit the main function when the goroutine "printer" is done
+	<-doneCh
+}
+
+func abcGen(ch chan string) {
+	for l := byte('a'); l <= ('z'); l++ {
+		ch <- string(l)
+	}
+
+	close(ch)
+}
+
+func printer(ch chan string, doneCh chan bool) {
+	for l := range ch {
+		println(l)
+	}
+
+	doneCh <- true
 }

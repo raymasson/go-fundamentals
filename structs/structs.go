@@ -27,7 +27,7 @@ func main() {
 
 	myCourse2 := newCourseMeta2("rmasson", "pro", 2)
 
-	fmt.Println(myCourse2)
+	fmt.Println(myCourse2.Author)
 }
 
 type courseMeta struct {
